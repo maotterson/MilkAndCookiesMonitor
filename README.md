@@ -3,4 +3,4 @@ A supplementary application designed to plug into containerized environments to 
 
 
 ## Implementation
-The image is designed to be "pluggable" in an existing container environment through environment variables in your orchestration config file (e.g. docker-compose).
+The image is designed to be "pluggable" in an existing container environment through environment variables in your orchestrator's manifest (e.g. docker-compose).
