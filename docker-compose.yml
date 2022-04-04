@@ -1,0 +1,51 @@
+version: '3.4'
+
+services:
+    milkandcookiesblazor:
+        image: ${DOCKER_REGISTRY-}milkandcookiesblazor
+        build:
+            context: .
+            dockerfile: MilkAndCookiesBlazor/Dockerfile
+        networks:
+            - mynetwork
+        environment:
+            #   CONTAINERS TO MONITOR
+            #   USAGE: CONTAINERS__{CONTAINER_NAME}: SUPPORTED_TYPE
+            CONTAINERS__MONGOCONTAINER: mongo
+            CONTAINERS__CACHECONTAINER: redis
+
+            #   CONTAINER SPECIFIC ENV VARS
+            #   USAGE: CONTAINERS__{CONTAINER_NAME}__{SUPPORTED ENV VARS}: VALUES
+            CONTAINERS__MONGOCONTAINER__CONNECTIONSTRING: 'https://mongocontainer:27017'
+            CONTAINERS__CACHECONTAINER__CONNECTIONSTRING: 'https://cachecontainer:6379'
+        ports:
+            - 8000:80
+            - 8001:443
+
+    mongocontainer:
+        image: mongo
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: user
+            MONGO_INITDB_ROOT_PASSWORD: password
+        volumes:
+            - mongodb_data_container:/data/db
+        ports:
+            - 27017:27017
+        networks:
+            - mynetwork
+
+    cachecontainer:
+        image: redis:6.2-alpine
+        restart: always
+        ports:
+          - '6379:6379'
+        command: redis-server --save 20 1 --loglevel warning --requirepass password
+        networks:
+            - mynetwork
+
+volumes:
+    mongodb_data_container:
+
+networks:
+    mynetwork:
