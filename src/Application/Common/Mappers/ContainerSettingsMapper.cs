@@ -2,8 +2,8 @@
 {
     private Dictionary<EValidContainer, Func<ContainerVariableTable, IContainerSettings>> Mapper = new()
     {
-        { EValidContainer.MONGO, (settings) => MongoSettingsMapper.Map(settings) },
-        { EValidContainer.REDIS, (settings) => RedisSettingsMapper.Map(settings) }
+        { EValidContainer.MONGO, (settingsTable) => MongoSettingsMapper.Map(settingsTable) },
+        { EValidContainer.REDIS, (settingsTable) => RedisSettingsMapper.Map(settingsTable) }
     };
     public Func<ContainerVariableTable, IContainerSettings> TryMap(string containerType)
     {

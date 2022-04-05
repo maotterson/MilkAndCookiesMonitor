@@ -28,9 +28,9 @@ public static class ContainerSettingsHelpers
         return table;
     }
 
-    public static ContainerSettingsList AsContainerSettingsList(this IList<IContainerSettings> containerSettingsList)
+    public static ContainerSettingsMasterList AsContainerSettingsList(this IList<IContainerSettings> containerSettingsList)
     {
-        var wrapperObject = new ContainerSettingsList()
+        var wrapperObject = new ContainerSettingsMasterList()
         {
             List = containerSettingsList
         };

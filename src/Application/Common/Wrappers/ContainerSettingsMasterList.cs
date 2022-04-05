@@ -1,4 +1,4 @@
-﻿public record ContainerSettingsList
+﻿public record ContainerSettingsMasterList
 {
     public IList<IContainerSettings> List { get; init; } = null!;
 

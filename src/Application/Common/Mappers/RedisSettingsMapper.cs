@@ -4,6 +4,7 @@
     {
         RedisContainerSettings settings = new()
         {
+            Name = vars.Name,
             ConnectionString = vars.MapValue("CONNECTIONSTRING"),
             Username = vars.MapValue("USERNAME"),
             Password = vars.MapValue("PASSWORD"),

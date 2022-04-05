@@ -2,6 +2,6 @@
 
 public interface IContainerSettingsService
 {
-    public ContainerSettingsList ExtractContainerSettingsList(IEnumerable<IConfigurationSection> containersConfig);
+    public ContainerSettingsMasterList ExtractContainerSettingsList(IEnumerable<IConfigurationSection> containersConfig);
     public string DumpContainerSettingsInfo();
 }
