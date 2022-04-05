@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.Configuration.EnvironmentVariables;
-using MilkAndCookiesBlazor.Data;
-using MilkAndCookiesBlazor.Mappers;
-using MilkAndCookiesBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
