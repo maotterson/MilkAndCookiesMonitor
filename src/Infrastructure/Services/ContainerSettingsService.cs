@@ -3,10 +3,11 @@
 public class ContainerSettingsService : IContainerSettingsService
 {
     private IContainerSettingsMapper containerMapper;
+    public ContainerSettingsList containerSettingsList { get; init; }
     public ContainerSettingsService(IContainerSettingsMapper containerMapper, IEnumerable<IConfigurationSection> containers)
     {
         this.containerMapper = containerMapper;
-        ExtractContainerSettingsList(containers);
+        this.containerSettingsList = ExtractContainerSettingsList(containers);
     }
 
     public ContainerSettingsList ExtractContainerSettingsList(IEnumerable<IConfigurationSection> containersConfig)

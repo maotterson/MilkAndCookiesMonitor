@@ -4,7 +4,9 @@
     {
         RedisContainerSettings settings = new()
         {
-            ConnectionString = vars.Table["CONNECTIONSTRING"] ?? null
+            ConnectionString = vars.Table["CONNECTIONSTRING"] ?? null,
+            Username = vars.Table["USERNAME"] ?? null,
+            Password = vars.Table["Password"] ?? null
         };
         return settings;
     }
