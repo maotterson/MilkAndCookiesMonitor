@@ -1,6 +1,6 @@
 ﻿public static class RedisSettingsMapper
 {
-    public static RedisContainerSettings Map(IEnumerable<ContainerVariable> vars)
+    public static RedisContainerSettings Map(ContainerVariableTable vars)
     {
         RedisContainerSettings settings = new()
         {

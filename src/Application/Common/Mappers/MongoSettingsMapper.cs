@@ -1,6 +1,6 @@
 ﻿public static class MongoSettingsMapper
 {
-    public static MongoContainerSettings Map(IEnumerable<ContainerVariable> vars)
+    public static MongoContainerSettings Map(ContainerVariableTable vars)
     {
         MongoContainerSettings settings = new()
         {
