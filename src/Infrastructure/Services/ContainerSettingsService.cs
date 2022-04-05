@@ -15,13 +15,10 @@ public class ContainerSettingsService : IContainerSettingsService
         {
             var containerType = containerConfig.Value.AsContainerType();
             var containerName = containerConfig.Key;
+            var containerVars = containerConfig.GetChildren();
 
-            var currentContainerVars = containerConfig.GetChildren();
-            Console.WriteLine(containerType);
-            Console.WriteLine(containerName);
-            Console.WriteLine(currentContainerVars);
-
-                
+            var containerVarTable = containerVars.AsContainerVariableTable();
+            var containerSettings = containerMapper.Map(containerType).Invoke(containerVarTable);
 
         }
     }
