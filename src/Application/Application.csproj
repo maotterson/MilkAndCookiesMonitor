@@ -1,17 +1,24 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+	  <RootNamespace>MilkAndCookiesBlazor.Application</RootNamespace>
+	  <AssemblyName>MilkAndCookiesBlazor.Application</AssemblyName>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-	<RootNamespace>MilkAndCookiesBlazor.Application</RootNamespace>
-	<AssemblyName>MilkAndCookiesBlazor.Application</AssemblyName>
-    <UserSecretsId>5faa70ff-3062-4a29-8122-ea122279eeaf</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+    <Compile Remove="_Imports.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="_Imports.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>

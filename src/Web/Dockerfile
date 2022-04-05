@@ -7,14 +7,14 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["MilkAndCookiesBlazor/MilkAndCookiesBlazor.csproj", "MilkAndCookiesBlazor/"]
-RUN dotnet restore "MilkAndCookiesBlazor/MilkAndCookiesBlazor.csproj"
+COPY ["MilkAndCookiesBlazor/Web.csproj", "MilkAndCookiesBlazor/"]
+RUN dotnet restore "MilkAndCookiesBlazor/Web.csproj"
 COPY . .
 WORKDIR "/src/MilkAndCookiesBlazor"
-RUN dotnet build "MilkAndCookiesBlazor.csproj" -c Release -o /app/build
+RUN dotnet build "Web.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "MilkAndCookiesBlazor.csproj" -c Release -o /app/publish
+RUN dotnet publish "Web.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

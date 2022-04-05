@@ -1,8 +1,5 @@
-﻿namespace MilkAndCookiesBlazor.Models.Containers.Enums
+﻿public enum EValidContainer
 {
-    public enum EValidContainer
-    {
-        MONGO,
-        REDIS
-    }
+    MONGO,
+    REDIS
 }

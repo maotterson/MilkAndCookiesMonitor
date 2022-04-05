@@ -26,6 +26,8 @@ namespace MilkAndCookiesBlazor.Services
                 Console.WriteLine(containerName);
                 Console.WriteLine(currentContainerVars);
 
+                
+
             }
         }
     }

@@ -1,4 +1,4 @@
 ﻿public record MongoContainerSettings : IContainerSettings
 {
-    public string? ConnectionString { get; init; }
+    public ContainerVariable? ConnectionString { get; init; }
 }
