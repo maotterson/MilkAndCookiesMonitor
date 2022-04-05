@@ -17,7 +17,7 @@ public class ContainerSettingsService : IContainerSettingsService
             var containerName = containerConfig.Key;
             var containerVars = containerConfig.GetChildren();
 
-            var containerVarTable = containerVars.AsContainerVariableTable();
+            var containerVarTable = containerVars.AsContainerVariableTable(containerName);
             var containerSettings = containerMapper.Map(containerType).Invoke(containerVarTable);
 
             Console.WriteLine(containerSettings);

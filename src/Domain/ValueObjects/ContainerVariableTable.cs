@@ -1,4 +1,5 @@
 ﻿public record ContainerVariableTable
 {
-    public IDictionary<string, ContainerVariable> Table {get; set;}
+    public string Name { get; init; }
+    public IDictionary<string, ContainerVariable> Table {get; init;}
 }

@@ -2,7 +2,7 @@
 
 public static class ContainerSettingsHelpers
 {
-    public static ContainerVariableTable AsContainerVariableTable(this IEnumerable<IConfigurationSection> configurationList)
+    public static ContainerVariableTable AsContainerVariableTable(this IEnumerable<IConfigurationSection> configurationList, string containerName)
     {
         Dictionary<string,ContainerVariable> containerVariables = new();
         foreach(var setting in configurationList)
@@ -21,6 +21,7 @@ public static class ContainerSettingsHelpers
 
         var table = new ContainerVariableTable()
         {
+            Name = containerName,
             Table = containerVariables
         };
 
