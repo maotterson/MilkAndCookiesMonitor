@@ -1,6 +1,7 @@
 ﻿using MilkAndCookiesBlazor.Models.Containers.Enums;
 using MilkAndCookiesBlazor.Models.Containers.Settings;
 using System.Runtime.Serialization;
+using MilkAndCookiesBlazor.Utils.Containers;
 
 namespace MilkAndCookiesBlazor.Mappers
 {

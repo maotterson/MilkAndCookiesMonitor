@@ -2,6 +2,6 @@
 {
     public record RedisContainerSettings : IContainerSettings
     {
-        public IVariable? ConnectionString { get; init; }
+        public string? ConnectionString { get; init; }
     }
 }
