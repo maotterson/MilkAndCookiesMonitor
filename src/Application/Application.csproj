@@ -8,14 +8,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="_Imports.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="_Imports.cs" />
-  </ItemGroup>
-
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />

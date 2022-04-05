@@ -4,7 +4,7 @@ public static class ContainerSettingsHelpers
 {
     public static ContainerVariableTable AsContainerVariableTable(this IEnumerable<IConfigurationSection> configurationList)
     {
-        HashSet<ContainerVariable> containerVariables = new();
+        Dictionary<string,ContainerVariable> containerVariables = new();
         foreach(var setting in configurationList)
         {
             var name = setting.Key;
@@ -16,7 +16,7 @@ public static class ContainerSettingsHelpers
                 Value = value
             };
 
-            containerVariables.Add(currentVar);
+            containerVariables.Add(currentVar.Name, currentVar);
         }
 
         var table = new ContainerVariableTable()

@@ -1,4 +1,4 @@
 ﻿public record ContainerVariableTable
 {
-    public HashSet<ContainerVariable> Table {get; set;}
+    public IDictionary<string, ContainerVariable> Table {get; set;}
 }

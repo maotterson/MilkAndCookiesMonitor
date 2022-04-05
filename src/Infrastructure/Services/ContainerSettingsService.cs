@@ -20,6 +20,8 @@ public class ContainerSettingsService : IContainerSettingsService
             var containerVarTable = containerVars.AsContainerVariableTable();
             var containerSettings = containerMapper.Map(containerType).Invoke(containerVarTable);
 
+            Console.WriteLine(containerSettings);
+
         }
     }
 }

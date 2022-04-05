@@ -4,7 +4,7 @@
     {
         RedisContainerSettings settings = new()
         {
-
+            ConnectionString = vars.Table["CONNECTIONSTRING"] ?? null
         };
         return settings;
     }
