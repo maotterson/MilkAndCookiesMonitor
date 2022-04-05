@@ -6,11 +6,13 @@ public class ContainerSettingsService : IContainerSettingsService
     public ContainerSettingsService(IContainerSettingsMapper containerMapper, IEnumerable<IConfigurationSection> containers)
     {
         this.containerMapper = containerMapper;
-        ExtractContainerSettings(containers);
+        ExtractContainerSettingsList(containers);
     }
 
-    public void ExtractContainerSettings(IEnumerable<IConfigurationSection> containersConfig)
+    public ContainerSettingsList ExtractContainerSettingsList(IEnumerable<IConfigurationSection> containersConfig)
     {
+        IList<IContainerSettings> containerSettingsList = new List<IContainerSettings>();
+
         foreach (var containerConfig in containersConfig)
         {
             var containerType = containerConfig.Value.AsContainerType();
@@ -20,8 +22,9 @@ public class ContainerSettingsService : IContainerSettingsService
             var containerVarTable = containerVars.AsContainerVariableTable(containerName);
             var containerSettings = containerMapper.Map(containerType).Invoke(containerVarTable);
 
-            Console.WriteLine(containerSettings);
-
+            containerSettingsList.Add(containerSettings);
         }
+
+        return containerSettingsList.AsContainerSettingsList();
     }
 }

@@ -27,4 +27,13 @@ public static class ContainerSettingsHelpers
 
         return table;
     }
+
+    public static ContainerSettingsList AsContainerSettingsList(this IList<IContainerSettings> containerSettingsList)
+    {
+        var wrapperObject = new ContainerSettingsList()
+        {
+            List = containerSettingsList
+        };
+        return wrapperObject;
+    }
 }

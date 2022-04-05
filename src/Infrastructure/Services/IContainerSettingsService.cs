@@ -2,5 +2,5 @@
 
 public interface IContainerSettingsService
 {
-    public void ExtractContainerSettings(IEnumerable<IConfigurationSection> containersConfig);
+    public ContainerSettingsList ExtractContainerSettingsList(IEnumerable<IConfigurationSection> containersConfig);
 }
