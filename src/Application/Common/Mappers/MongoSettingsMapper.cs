@@ -2,13 +2,11 @@
 {
     public static MongoContainerSettings Map(ContainerVariableTable vars)
     {
-        
-
         MongoContainerSettings settings = new()
         {
-            ConnectionString = vars.Table["CONNECTIONSTRING"] ?? null,
-            Username = vars.Table["USERNAME"] ?? null,
-            Password = vars.Table["PASSWORD"] ?? null
+            ConnectionString = vars.MapValue("CONNECTIONSTRING"),
+            Username = vars.MapValue("USERNAME"),
+            Password = vars.MapValue("PASSWORD")
         };
         return settings;
     }

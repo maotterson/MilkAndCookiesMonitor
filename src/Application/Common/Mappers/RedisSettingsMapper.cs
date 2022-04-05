@@ -4,10 +4,11 @@
     {
         RedisContainerSettings settings = new()
         {
-            ConnectionString = vars.Table["CONNECTIONSTRING"] ?? null,
-            Username = vars.Table["USERNAME"] ?? null,
-            Password = vars.Table["Password"] ?? null
+            ConnectionString = vars.MapValue("CONNECTIONSTRING"),
+            Username = vars.MapValue("USERNAME"),
+            Password = vars.MapValue("PASSWORD"),
         };
         return settings;
     }
+
 }

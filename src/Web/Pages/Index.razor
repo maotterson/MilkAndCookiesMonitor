@@ -5,11 +5,12 @@
 <PageTitle>Index</PageTitle>
 
 <button @onclick="Test">test</button>
+@output
 
 @code{
-
+    private string output;
     public void Test()
     {
-        Console.WriteLine(containerSettingsService);
+        output = containerSettingsService.DumpContainerSettingsInfo();
     }
 }
