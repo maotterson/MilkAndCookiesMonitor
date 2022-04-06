@@ -10,7 +10,7 @@
     {
         var service = ServiceList.List.FirstOrDefault(current =>
         {
-            return current.ContainerSettings.Name == containerName;
+            return current.GetSettings().Name == containerName;
         });
 
         return service;

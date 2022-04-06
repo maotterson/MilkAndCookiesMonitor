@@ -21,7 +21,7 @@
     [Parameter]
     public IContainerService Service { get; set; } = null!;
 
-    private string name => Service.ContainerSettings.Name;
-    private string type => Service.ContainerSettings.ContainerType.ToString();
-    private ContainerVariableTable table => Service.ContainerSettings.VariableTable;
+    private string name => Service.GetSettings().Name;
+    private string type => Service.GetSettings().ContainerType.ToString();
+    private ContainerVariableTable table => Service.GetSettings().VariableTable;
 }

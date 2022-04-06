@@ -1,9 +1,10 @@
 ﻿public class RedisContainerService : IContainerService
 {
-    public IContainerSettings ContainerSettings { get; init; } = null!;
+    public RedisContainerSettings ContainerSettings { get; init; } = null!;
 
     public RedisContainerService(IContainerSettings settings)
     {
-        ContainerSettings = settings;
+        ContainerSettings = (RedisContainerSettings)settings;
     }
+    IContainerSettings IContainerService.GetSettings() => ContainerSettings;
 }

@@ -31,7 +31,7 @@
 
     private void OnClickContainerSummary(IContainerService item)
     {
-        var name = item.ContainerSettings.Name;
+        var name = item.GetSettings().Name;
         uriHelper.NavigateTo($"Container/{name}");
     }
 
