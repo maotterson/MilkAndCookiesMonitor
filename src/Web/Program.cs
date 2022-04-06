@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.Configuration.EnvironmentVariables;
 
@@ -14,6 +14,7 @@ builder.Services.AddSingleton<IContainerSettingsService, ContainerSettingsServic
     var containers = builder.Configuration.GetSection("CONTAINERS").GetChildren();
     return new(mapper,containers);
 });
+
 
 var app = builder.Build();
 
