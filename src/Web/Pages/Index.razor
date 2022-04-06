@@ -6,13 +6,9 @@
 <button @onclick="Test">test</button>
 @if(list is not null)
 {
-    foreach(var item in list)
+    @foreach(var item in list)
     {
-        <table>
-            <tr>
-                <td>@item.ContainerSettings.Name</td><td>@item.ContainerSettings.ContainerType</td>
-            </tr>
-        </table>
+        <ContainerSummary Service="item"/>
     }
 }
 

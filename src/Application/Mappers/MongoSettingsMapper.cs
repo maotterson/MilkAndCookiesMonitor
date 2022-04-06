@@ -5,6 +5,7 @@
         MongoContainerSettings settings = new()
         {
             Name = vars.Name,
+            VariableTable = vars,
             ConnectionString = vars.MapValue("CONNECTIONSTRING"),
             Username = vars.MapValue("USERNAME"),
             Password = vars.MapValue("PASSWORD")
