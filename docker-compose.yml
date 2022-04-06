@@ -9,15 +9,15 @@ services:
         networks:
             - mynetwork
         environment:
-            #   CONTAINERS TO MONITOR
+            #   CONTAINERS
             #   USAGE: CONTAINERS__{CONTAINER_NAME}: SUPPORTED_TYPE
-            CONTAINERS__MONGOCONTAINER: mongo
-            CONTAINERS__CACHECONTAINER: redis
-
-            #   CONTAINER SPECIFIC ENV VARS
+            #   ENVIRONMENT VARS
             #   USAGE: CONTAINERS__{CONTAINER_NAME}__{SUPPORTED ENV VARS}: VALUES
-            CONTAINERS__MONGOCONTAINER__CONNECTIONSTRING: 'https://mongocontainer:27017'
-            CONTAINERS__CACHECONTAINER__CONNECTIONSTRING: 'https://cachecontainer:6379'
+            CONTAINERS__MONGOCONTAINER: mongo
+            CONTAINERS__MONGOCONTAINER__CONNECTIONSTRING: 'mongodb://user:password@mongocontainer:27017'
+
+            CONTAINERS__CACHECONTAINER: redis
+            CONTAINERS__CACHECONTAINER__CONNECTIONSTRING: 'cache://cachecontainer:6379'
         ports:
             - 8000:80
             - 8001:443

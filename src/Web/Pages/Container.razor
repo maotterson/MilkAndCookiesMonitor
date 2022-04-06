@@ -1,8 +1,9 @@
 ﻿@page "/container/{name}"
+@using MilkAndCookiesBlazor.Web.Components.Containers
 @inject IContainerRegistryService containerRegistryService
 @if(containerService is null)
 {
-    <h3>Container with the name @name not found.</h3>
+    <p>Container with the name @name not found.</p>
 }
 else
 {
@@ -10,6 +11,16 @@ else
     <ContainerSummary
         Service="@containerService"
     />
+    @switch (settings.ContainerType)
+    {
+        case EValidContainer.MONGO:
+            <MongoContainer Service="(MongoContainerService)containerService"/>
+            break;
+        default:
+            <p>Invalid container type.</p>
+            break;
+
+    }
 }
 
 
@@ -17,6 +28,7 @@ else
     [Parameter]
     public string? name { get; set; }
     private IContainerService? containerService = null;
+    private IContainerSettings settings => containerService.GetSettings();
 
     protected override void OnInitialized()
     {

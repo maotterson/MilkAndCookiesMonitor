@@ -12,9 +12,10 @@ public class MongoContainerService : IContainerService
     }
     IContainerSettings IContainerService.GetSettings() => ContainerSettings;
 
-    public async Task GetDatabases()
+    public async Task<IList<string>> GetDatabases()
     {
-        var databases = await _mongoClient.ListDatabaseNamesAsync();
+        var cursor = await _mongoClient.ListDatabaseNamesAsync();
+        return cursor.ToList();
     }
     public void Connect()
     {
@@ -22,11 +23,11 @@ public class MongoContainerService : IContainerService
         {
             var connectionString = ContainerSettings.ConnectionString is not null ? ContainerSettings.ConnectionString.Value : throw new();
             _mongoClient = new MongoClient(connectionString);
-            GetDatabases();
         }
         catch(Exception ex)
         {
-
+            // todo
+            Console.WriteLine(ex.Message);
         }
 
     }

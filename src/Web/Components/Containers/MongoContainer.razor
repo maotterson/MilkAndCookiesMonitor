@@ -1,0 +1,28 @@
+﻿<div>
+    @if(dbs is not null)
+    {
+        foreach(var db in dbs)
+        {
+            <p>@db</p>
+        }
+    }
+</div>
+
+@code {
+    [Parameter]
+    public MongoContainerService Service { get; init; } = null!;
+    public IList<string>? dbs { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        dbs = await GetDBNames();
+    }
+
+    private async Task<IList<string>> GetDBNames()
+    {
+        var list = await Service.GetDatabases();
+        return list;
+    }
+}
+
+
