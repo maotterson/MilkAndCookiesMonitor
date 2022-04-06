@@ -3,7 +3,7 @@
     public static ContainerServiceList CreateContainerServiceList(ContainerSettingsMasterList masterSettingsList)
     {
         var serviceList = new List<IContainerService>();
-        foreach(var setting in masterSettingsList.Get())
+        foreach(var setting in masterSettingsList.List)
         {
             var container = CreateContainerService(setting);
             serviceList.Add(container);

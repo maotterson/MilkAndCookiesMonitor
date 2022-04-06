@@ -1,16 +1,25 @@
 ﻿@page "/"
-@inject IConfiguration configuration
-@inject IContainerSettingsService containerSettingsService
+@inject IContainerRegistryService containerRegistry
 
 <PageTitle>Index</PageTitle>
 
 <button @onclick="Test">test</button>
-@output
+@if(list is not null)
+{
+    foreach(var item in list)
+    {
+        <table>
+            <tr>
+                <td>@item.ContainerSettings.Name</td><td>@item.ContainerSettings.ContainerType</td>
+            </tr>
+        </table>
+    }
+}
 
 @code{
-    private string output;
+    private IList<IContainerService> list = null!;
     public void Test()
     {
-        output = containerSettingsService.DumpContainerSettingsInfo();
+        list = containerRegistry.ServiceList.List;
     }
 }

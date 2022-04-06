@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.Extensions.Configuration.EnvironmentVariables;
-
-var builder = WebApplication.CreateBuilder(args);
+﻿var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -13,6 +9,12 @@ builder.Services.AddSingleton<IContainerSettingsService, ContainerSettingsServic
     var mapper = provider.GetService<IContainerSettingsMapper>() ?? throw new();
     var containers = builder.Configuration.GetSection("CONTAINERS").GetChildren();
     return new(mapper,containers);
+});
+builder.Services.AddSingleton<IContainerRegistryService, ContainerRegistryService>(provider =>
+{
+    var settingsService = provider.GetService<IContainerSettingsService>() ?? throw new();
+    var settings = settingsService.SettingsRegistry;
+    return new(settings);
 });
 
 
