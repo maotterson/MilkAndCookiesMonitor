@@ -1,0 +1,26 @@
+﻿@page "/container/{name}"
+@inject IContainerRegistryService containerRegistryService
+@if(containerService is null)
+{
+    <h3>Container with the name @name not found.</h3>
+}
+else
+{
+    <h3>Container Info</h3>
+    <ContainerSummary
+        Service="@containerService"
+    />
+}
+
+
+@code {
+    [Parameter]
+    public string? name { get; set; }
+    private IContainerService? containerService = null;
+
+    protected override void OnInitialized()
+    {
+        if (name is null) return;
+        containerService = containerRegistryService.GetServiceByContainerName(name);
+    }
+}

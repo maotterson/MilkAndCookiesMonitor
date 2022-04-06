@@ -10,6 +10,7 @@
             Username = vars.MapValue("USERNAME"),
             Password = vars.MapValue("PASSWORD")
         };
+
         return settings;
     }
 }

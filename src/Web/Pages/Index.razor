@@ -1,21 +1,38 @@
 ﻿@page "/"
 @inject IContainerRegistryService containerRegistry
+@inject NavigationManager uriHelper
 
 <PageTitle>Index</PageTitle>
 
-<button @onclick="Test">test</button>
 @if(list is not null)
 {
     @foreach(var item in list)
     {
-        <ContainerSummary Service="item"/>
+        <div 
+            @onclick="() => OnClickContainerSummary(item)"
+            class="border border-secondary mb-2"
+            role="button"
+        >
+            <ContainerSummary
+                Service="item"
+            />
+        </div>
     }
 }
 
-@code{
+@code
+{
     private IList<IContainerService> list = null!;
-    public void Test()
+
+    protected override void OnInitialized()
     {
         list = containerRegistry.ServiceList.List;
     }
+
+    private void OnClickContainerSummary(IContainerService item)
+    {
+        var name = item.ContainerSettings.Name;
+        uriHelper.NavigateTo($"Container/{name}");
+    }
+
 }

@@ -1,25 +1,27 @@
-﻿<table>
-    <tr>
-        <th class="fw-bold">@name</th>
-    </tr>
-
-    <tr>
-        <td class="fw-bold">Type</td><td>@type</td>
-    </tr>
-
-    @foreach(var item in table.Table)
-    {
+﻿<div class="p-2">
+    <table>
         <tr>
-            <td class="fw-bold">@item.Key</td><td>@item.Value.Value</td>
+            <th class="fw-bold">@name</th>
         </tr>
-    }
-</table>
 
-        @code{
-        [Parameter]
-        public IContainerService Service { get; set; } = null!;
+        <tr>
+            <td class="fw-bold">Type</td><td>@type</td>
+        </tr>
 
-        private string name => Service.ContainerSettings.Name;
-        private string type => Service.ContainerSettings.ContainerType.ToString();
-        private ContainerVariableTable table => Service.ContainerSettings.VariableTable;
+        @foreach(var item in table.Table)
+        {
+            <tr>
+                <td class="fw-bold">@item.Key</td><td>@item.Value.Value</td>
+            </tr>
+        }
+    </table>
+</div>
+
+@code{
+    [Parameter]
+    public IContainerService Service { get; set; } = null!;
+
+    private string name => Service.ContainerSettings.Name;
+    private string type => Service.ContainerSettings.ContainerType.ToString();
+    private ContainerVariableTable table => Service.ContainerSettings.VariableTable;
 }
