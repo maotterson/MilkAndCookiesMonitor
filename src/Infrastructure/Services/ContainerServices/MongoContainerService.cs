@@ -37,4 +37,8 @@ public class MongoContainerService : IContainerService
         var db = _mongoClient.GetDatabase(dbName);
         CurrentDatabaseService = new(db);
     }
+    public void ResetDB()
+    {
+        CurrentDatabaseService = null;
+    }
 }

@@ -17,12 +17,12 @@
 }
 else
 {
+    <p>DB</p>
     <MongoDatabase
         Service="_currentDB"
         OnBackClicked="ClearDB"
     />
 }
-
 
 @code {
     [Parameter]
@@ -48,7 +48,7 @@ else
     }
     public void ClearDB()
     {
-        Service.CurrentDatabaseService = null;
+        Service.ResetDB();
         StateHasChanged();
     }
 }
