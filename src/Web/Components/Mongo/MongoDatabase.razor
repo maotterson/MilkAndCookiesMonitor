@@ -1,18 +1,18 @@
-﻿@foreach(var collection in collections)
+﻿@foreach(var collection in GetCollections().Result)
 {
     <p>@collection</p>
 }
 <button @onclick="Back">Back</button>
 
 @code {
-    [Attribute]
+    [Parameter]
     public MongoDatabaseService Service { get; set; }
     [Parameter]
     public EventCallback OnBackClicked { get; set; }
-    private IList<string> collections => Service.DumpCollectionNames();
 
-    public Task Back()
+    public async Task Back()
     {
         await OnBackClicked.InvokeAsync();
     }
+    public async Task<List<string>> GetCollections() => await Service.DumpCollectionNames();
 }

@@ -19,7 +19,7 @@ else
 {
     <MongoDatabase
         Service="_currentDB"
-        onDoneButtonClicked="ClearDB"
+        OnBackClicked="ClearDB"
     />
 }
 
@@ -41,9 +41,9 @@ else
         return list;
     }
 
-    private async Task<MongoDatabaseService> SetCurrentDBByName(string dbName)
+    private void SetCurrentDBByName(string dbName)
     {
-        Service.SetCurrentDBByName(dbName)
+        Service.SetCurrentDBByName(dbName);
         StateHasChanged();
     }
     public void ClearDB()
