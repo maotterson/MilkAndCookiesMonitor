@@ -3,6 +3,7 @@
 public class MongoContainerService : IContainerService
 {
     public MongoContainerSettings ContainerSettings { get; init; } = null!;
+    public MongoDatabaseService? CurrentDatabaseService { get; }
     private MongoClient _mongoClient;
 
     public MongoContainerService(IContainerSettings settings)
@@ -30,5 +31,10 @@ public class MongoContainerService : IContainerService
             Console.WriteLine(ex.Message);
         }
 
+    }
+    public void SetCurrentDBByName(string dbName)
+    {
+        var db = _mongoClient.GetDatabase(dbName);
+        _currentDatabaseService = new(db);
     }
 }

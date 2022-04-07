@@ -1,0 +1,56 @@
+﻿@if(_currentDB is null)
+{
+    <div>
+        @if(dbs is not null)
+        {
+            foreach(var db in dbs)
+            {
+                <p
+                    @onclick="()=>SetCurrentDBByName(db)"
+                    role="button"
+                >
+                    @db
+                </p>
+            }
+        }
+    </div>
+}
+else
+{
+    <MongoDatabase
+        Service="_currentDB"
+        onDoneButtonClicked="ClearDB"
+    />
+}
+
+
+@code {
+    [Parameter]
+    public MongoContainerService Service { get; init; } = null!;
+    public IList<string>? dbs { get; set; }
+    private MongoDatabaseService? _currentDB => Service.CurrentDatabaseService;
+
+    protected async override Task OnInitializedAsync()
+    {
+        dbs = await GetDBNames();
+    }
+
+    private async Task<IList<string>> GetDBNames()
+    {
+        var list = await Service.GetDatabases();
+        return list;
+    }
+
+    private async Task<MongoDatabaseService> SetCurrentDBByName(string dbName)
+    {
+        Service.SetCurrentDBByName(dbName)
+        StateHasChanged();
+    }
+    public void ClearDB()
+    {
+        Service.CurrentDatabaseService = null;
+        StateHasChanged();
+    }
+}
+
+
