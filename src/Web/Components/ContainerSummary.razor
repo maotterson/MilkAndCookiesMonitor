@@ -1,7 +1,11 @@
 ﻿<div class="p-2">
     <table>
         <tr>
-            <th class="fw-bold">@name</th>
+            <th class="fw-bold">
+                <span class=@(GetStatus()==EContainerStatus.Reachable ? "alert-success" : "alert-warning")>
+                    @name
+                </span>
+            </th>
         </tr>
 
         <tr>
@@ -24,4 +28,8 @@
     private string name => Service.GetSettings().Name;
     private string type => Service.GetSettings().ContainerType.ToString();
     private ContainerVariableTable table => Service.GetSettings().VariableTable;
+    private EContainerStatus GetStatus()
+    {
+        return Service.GetStatus();
+    }
 }

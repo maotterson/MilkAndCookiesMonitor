@@ -1,4 +1,6 @@
-﻿using MongoDB.Driver;
+﻿using System.Net.NetworkInformation;
+using MongoDB.Driver;
+using MongoDB.Driver.Core.Clusters;
 
 public class MongoContainerService : IContainerService
 {
@@ -40,5 +42,19 @@ public class MongoContainerService : IContainerService
     public void ResetDB()
     {
         CurrentDatabaseService = null;
+    }
+
+    public EContainerStatus GetStatus()
+    {
+        try
+        {
+            var isSuccess = _mongoClient.Cluster.Description.State == ClusterState.Connected;
+
+            return isSuccess ? EContainerStatus.Reachable : throw new();
+        }
+        catch (Exception ex)
+        {
+            return EContainerStatus.Unreachable;
+        }
     }
 }
