@@ -1,18 +1,29 @@
-﻿@foreach(var collection in GetCollections().Result)
+﻿@if(collections is not null)
 {
-    <p>@collection</p>
+    <h3>Collections</h3>
+    @foreach(var collection in collections)
+    {
+        <p>@collection</p>
+    }
 }
 <button @onclick="Back">Back</button>
 
 @code {
     [Parameter]
-    public MongoDatabaseService Service { get; set; }
+    public MongoDatabaseService Service { get; set; } = null!;
     [Parameter]
     public EventCallback OnBackClicked { get; set; }
+    private List<string>? collections;
+
+    public async Task<List<string>> GetCollections() => await Service.DumpCollectionNames();
+
+    protected async override Task OnInitializedAsync()
+    {
+        collections = await GetCollections();
+    }
 
     public async Task Back()
     {
         await OnBackClicked.InvokeAsync();
     }
-    public async Task<List<string>> GetCollections() => await Service.DumpCollectionNames();
 }
