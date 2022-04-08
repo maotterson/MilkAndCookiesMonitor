@@ -3,7 +3,7 @@
     <h3>Collections</h3>
     @foreach(var item in collection)
     {
-        <p role="button" @onclick="() => SetCurrentCollectionByName(collectionName)">@collectionName</p>
+        <p role="button">@item.ToString()</p>
     }
 }
 <button @onclick="Back">Back</button>
@@ -12,17 +12,16 @@
     public IMongoCollectionService Service { get; set; } = null!;
     [Parameter]
     public EventCallback OnBackClicked { get; set; }
-    private List<string>? collection;
+    private IList<dynamic>? collection;
+    public async Task<IList<dynamic>> GetAllItemsAsync() => await Service.GetAllItemsAsync();
 
-    public async Task<List<dynamic>> GetAllItemsAsync() => await Service.GetAllItemsAsync();
+    protected async override Task OnInitializedAsync()
+    {
+        collection = await GetAllItemsAsync();
+    }
 
-     public async Task Back()
+    public async Task Back()
     {
         await OnBackClicked.InvokeAsync();
-    }
-    public void ClearCollection()
-    {
-        Service.Reset();
-        StateHasChanged();
     }
 }

@@ -1,4 +1,4 @@
 ﻿public interface IMongoCollectionService
 {
-    public Task<IList<dynamic>> GetAllItems();
+    public Task<IList<dynamic>> GetAllItemsAsync();
 }
