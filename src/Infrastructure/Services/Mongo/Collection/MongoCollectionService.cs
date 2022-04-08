@@ -8,7 +8,7 @@ public class MongoCollectionService : IMongoCollectionService
         _collection=collection;
     }
 
-    public async Task<IList<dynamic>> GetAllItems()
+    public async Task<IList<dynamic>> GetAllItemsAsync()
     {
         var items = await _collection.Find(_ => true).ToListAsync();
         return items;

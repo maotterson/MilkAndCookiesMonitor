@@ -18,17 +18,20 @@ public class MongoContainerService : IContainerService, IMongoContainerService
     {
         try
         {
+            if (_mongoClient is null) throw new();
             var isSuccess = _mongoClient.Cluster.Description.State == ClusterState.Connected;
 
             return isSuccess ? EContainerStatus.Reachable : throw new();
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex);
             return EContainerStatus.Unreachable;
         }
     }
     public async Task<IList<string>> GetDatabasesAsync()
     {
+        if (_mongoClient is null) throw new();
         var cursor = await _mongoClient.ListDatabaseNamesAsync();
         return cursor.ToList();
     }
@@ -48,6 +51,7 @@ public class MongoContainerService : IContainerService, IMongoContainerService
     }
     public void SetCurrentDBByName(string dbName)
     {
+        if (_mongoClient is null) throw new();
         var db = _mongoClient.GetDatabase(dbName);
         CurrentDatabaseService = new MongoDatabaseService(db);
     }
