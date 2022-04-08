@@ -1,21 +1,21 @@
 ﻿@if(collections is not null)
 {
     <h3>Collections</h3>
-    @foreach(var collection in collections)
+    @foreach(var collectionName in collections)
     {
-        <p>@collection</p>
+        <p role="button" @onclick="() => SetCurrentCollectionByName(collectionName)">@collectionName</p>
     }
 }
 <button @onclick="Back">Back</button>
 
 @code {
     [Parameter]
-    public MongoDatabaseService Service { get; set; } = null!;
+    public IMongoDatabaseService Service { get; set; } = null!;
     [Parameter]
     public EventCallback OnBackClicked { get; set; }
     private List<string>? collections;
 
-    public async Task<List<string>> GetCollections() => await Service.DumpCollectionNames();
+    public async Task<List<string>> GetCollections() => await Service.GetCollectionNamesAsync();
 
     protected async override Task OnInitializedAsync()
     {
@@ -25,5 +25,15 @@
     public async Task Back()
     {
         await OnBackClicked.InvokeAsync();
+    }
+    private void SetCurrentCollectionByName(string collectionName)
+    {
+        Service.SetCurrentCollectionServiceByName(collectionName);
+        StateHasChanged();
+    }
+    public void ClearCollection()
+    {
+        Service.ResetCollection();
+        StateHasChanged();
     }
 }

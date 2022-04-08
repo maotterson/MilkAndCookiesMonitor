@@ -36,7 +36,7 @@
 
     private async Task<IList<string>> GetDBNames()
     {
-        var list = await Service.GetDatabases();
+        var list = await Service.GetDatabasesAsync();
         return list;
     }
 

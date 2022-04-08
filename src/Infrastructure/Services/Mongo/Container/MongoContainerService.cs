@@ -2,11 +2,11 @@
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Clusters;
 
-public class MongoContainerService : IContainerService
+public class MongoContainerService : IContainerService, IMongoContainerService
 {
     public MongoContainerSettings ContainerSettings { get; init; } = null!;
-    public MongoDatabaseService? CurrentDatabaseService { get; set; }
-    private MongoClient _mongoClient;
+    public IMongoDatabaseService? CurrentDatabaseService { get; set; }
+    private MongoClient? _mongoClient;
 
     public MongoContainerService(IContainerSettings settings)
     {
@@ -14,36 +14,6 @@ public class MongoContainerService : IContainerService
         Connect();
     }
     IContainerSettings IContainerService.GetSettings() => ContainerSettings;
-
-    public async Task<IList<string>> GetDatabases()
-    {
-        var cursor = await _mongoClient.ListDatabaseNamesAsync();
-        return cursor.ToList();
-    }
-    public void Connect()
-    {
-        try
-        {
-            var connectionString = ContainerSettings.ConnectionString is not null ? ContainerSettings.ConnectionString.Value : throw new();
-            _mongoClient = new MongoClient(connectionString);
-        }
-        catch(Exception ex)
-        {
-            // todo
-            Console.WriteLine(ex.Message);
-        }
-
-    }
-    public void SetCurrentDBByName(string dbName)
-    {
-        var db = _mongoClient.GetDatabase(dbName);
-        CurrentDatabaseService = new(db);
-    }
-    public void ResetDB()
-    {
-        CurrentDatabaseService = null;
-    }
-
     public EContainerStatus GetStatus()
     {
         try
@@ -56,5 +26,33 @@ public class MongoContainerService : IContainerService
         {
             return EContainerStatus.Unreachable;
         }
+    }
+    public async Task<IList<string>> GetDatabasesAsync()
+    {
+        var cursor = await _mongoClient.ListDatabaseNamesAsync();
+        return cursor.ToList();
+    }
+    public void Connect()
+    {
+        try
+        {
+            var connectionString = ContainerSettings.ConnectionString is not null ? ContainerSettings.ConnectionString.Value : throw new();
+            _mongoClient = new MongoClient(connectionString);
+        }
+        catch (Exception ex)
+        {
+            // todo
+            Console.WriteLine(ex.Message);
+        }
+
+    }
+    public void SetCurrentDBByName(string dbName)
+    {
+        var db = _mongoClient.GetDatabase(dbName);
+        CurrentDatabaseService = new MongoDatabaseService(db);
+    }
+    public void ResetDB()
+    {
+        CurrentDatabaseService = null;
     }
 }
