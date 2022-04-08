@@ -6,6 +6,7 @@
         {
             <p role="button" @onclick="() => SetCurrentCollectionByName(collectionName)">@collectionName</p>
         }
+        <button @onclick="Back">Back</button>
     }
     else
     {
@@ -14,11 +15,7 @@
             OnBackClicked="ClearCollection"
         />
     }
-    
-
-
 }
-<button @onclick="Back">Back</button>
 
 @code {
     [Parameter]

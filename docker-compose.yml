@@ -15,9 +15,6 @@ services:
             #   USAGE: CONTAINERS__{CONTAINER_NAME}__{SUPPORTED ENV VARS}: VALUES
             CONTAINERS__MONGOCONTAINER: mongo
             CONTAINERS__MONGOCONTAINER__CONNECTIONSTRING: 'mongodb://user:password@mongocontainer:27017'
-            
-            CONTAINERS__BAD: mongo
-            CONTAINERS__BAD__CONNECTIONSTRING: 'mongodb://user:password@incorrectlyconfigured:27017'
 
             CONTAINERS__CACHECONTAINER: redis
             CONTAINERS__CACHECONTAINER__CONNECTIONSTRING: 'cache://cachecontainer:6379'

@@ -1,12 +1,12 @@
 ﻿@if(collection is not null)
 {
-    <h3>Collections</h3>
+    <h3>Items</h3>
     @foreach(var item in collection)
     {
         <p role="button">@item.ToString()</p>
     }
+    <button @onclick="Back">Back</button>
 }
-<button @onclick="Back">Back</button>
 @code {
     [Parameter]
     public IMongoCollectionService Service { get; set; } = null!;
