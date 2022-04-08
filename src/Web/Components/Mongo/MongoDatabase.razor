@@ -1,10 +1,22 @@
 ﻿@if(collections is not null)
 {
-    <h3>Collections</h3>
-    @foreach(var collectionName in collections)
-    {
-        <p role="button" @onclick="() => SetCurrentCollectionByName(collectionName)">@collectionName</p>
+    @if(_currentCollectionService is null){
+        <h3>Collections</h3>
+        @foreach(var collectionName in collections)
+        {
+            <p role="button" @onclick="() => SetCurrentCollectionByName(collectionName)">@collectionName</p>
+        }
     }
+    else
+    {
+        <MongoCollection
+            Service="_currentCollectionService"
+            OnBackClicked="ClearCollection"
+        />
+    }
+    
+
+
 }
 <button @onclick="Back">Back</button>
 
@@ -14,14 +26,14 @@
     [Parameter]
     public EventCallback OnBackClicked { get; set; }
     private List<string>? collections;
+    private IMongoCollectionService? _currentCollectionService => Service.CurrentCollectionService;
 
-    public async Task<List<string>> GetCollections() => await Service.GetCollectionNamesAsync();
+    public async Task<List<string>> GetCollectionsAsync() => await Service.GetCollectionNamesAsync();
 
     protected async override Task OnInitializedAsync()
     {
-        collections = await GetCollections();
+        collections = await GetCollectionsAsync();
     }
-
     public async Task Back()
     {
         await OnBackClicked.InvokeAsync();

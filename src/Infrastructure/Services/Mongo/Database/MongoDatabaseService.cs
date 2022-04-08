@@ -3,7 +3,7 @@
 public class MongoDatabaseService : IMongoDatabaseService
 {
     private IMongoDatabase _database = null!;
-    private IMongoCollectionService? _service = null;
+    public IMongoCollectionService? CurrentCollectionService { get; set; }  
 
     public MongoDatabaseService(IMongoDatabase db)
     {
@@ -17,12 +17,12 @@ public class MongoDatabaseService : IMongoDatabaseService
     }
     public void ResetCollection()
     {
-        _service = null;
+        CurrentCollectionService = null;
     }
     public void SetCurrentCollectionServiceByName(string collectionName)
     {
-        var collection = _database.GetCollection<string>(collectionName);
-        _service = new MongoDatabaseService(collection);
+        var collection = _database.GetCollection<dynamic>(collectionName);
+        CurrentCollectionService = new MongoCollectionService(collection);
     }
 
 }

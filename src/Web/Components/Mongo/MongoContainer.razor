@@ -27,7 +27,7 @@
     [Parameter]
     public MongoContainerService Service { get; init; } = null!;
     public IList<string>? dbs { get; set; }
-    private MongoDatabaseService? _currentDB => Service.CurrentDatabaseService;
+    private IMongoDatabaseService? _currentDB => Service.CurrentDatabaseService;
 
     protected async override Task OnInitializedAsync()
     {

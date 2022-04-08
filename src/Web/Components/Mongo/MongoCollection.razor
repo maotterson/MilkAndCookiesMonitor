@@ -1,0 +1,28 @@
+﻿@if(collection is not null)
+{
+    <h3>Collections</h3>
+    @foreach(var item in collection)
+    {
+        <p role="button" @onclick="() => SetCurrentCollectionByName(collectionName)">@collectionName</p>
+    }
+}
+<button @onclick="Back">Back</button>
+@code {
+    [Parameter]
+    public IMongoCollectionService Service { get; set; } = null!;
+    [Parameter]
+    public EventCallback OnBackClicked { get; set; }
+    private List<string>? collection;
+
+    public async Task<List<dynamic>> GetAllItemsAsync() => await Service.GetAllItemsAsync();
+
+     public async Task Back()
+    {
+        await OnBackClicked.InvokeAsync();
+    }
+    public void ClearCollection()
+    {
+        Service.Reset();
+        StateHasChanged();
+    }
+}
