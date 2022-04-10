@@ -1,4 +1,7 @@
-﻿public interface IMongoCollectionService
+﻿using MongoDB.Bson;
+using Newtonsoft.Json.Linq;
+
+public interface IMongoCollectionService
 {
-    public Task<IList<dynamic>> GetAllItemsAsync();
+    public Task<JArray> GetAllItemsAsJSONAsync();
 }

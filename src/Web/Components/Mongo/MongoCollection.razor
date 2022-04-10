@@ -1,10 +1,8 @@
-﻿@if(collection is not null)
+﻿@using Newtonsoft.Json.Linq
+@if(collection is not null)
 {
     <h3>Items</h3>
-    @foreach(var item in collection)
-    {
-        <p role="button">@item.ToString()</p>
-    }
+    @collection
     <button @onclick="Back">Back</button>
 }
 @code {
@@ -12,8 +10,8 @@
     public IMongoCollectionService Service { get; set; } = null!;
     [Parameter]
     public EventCallback OnBackClicked { get; set; }
-    private IList<dynamic>? collection;
-    public async Task<IList<dynamic>> GetAllItemsAsync() => await Service.GetAllItemsAsync();
+    private JArray? collection;
+    public async Task<JArray> GetAllItemsAsync() => await Service.GetAllItemsAsJSONAsync();
 
     protected async override Task OnInitializedAsync()
     {

@@ -21,7 +21,7 @@ public class MongoContainerService : IContainerService, IMongoContainerService
             if (_mongoClient is null) throw new();
             var isSuccess = _mongoClient.Cluster.Description.State == ClusterState.Connected;
 
-            return isSuccess ? EContainerStatus.Reachable : throw new();
+            return isSuccess ? EContainerStatus.Reachable : throw new("Container unreachable.");
         }
         catch (Exception ex)
         {

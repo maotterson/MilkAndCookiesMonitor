@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 
 public class MongoDatabaseService : IMongoDatabaseService
 {
@@ -21,7 +22,7 @@ public class MongoDatabaseService : IMongoDatabaseService
     }
     public void SetCurrentCollectionServiceByName(string collectionName)
     {
-        var collection = _database.GetCollection<dynamic>(collectionName);
+        var collection = _database.GetCollection<BsonDocument>(collectionName);
         CurrentCollectionService = new MongoCollectionService(collection);
     }
 
